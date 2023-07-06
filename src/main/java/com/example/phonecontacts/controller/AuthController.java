@@ -1,6 +1,6 @@
 package com.example.phonecontacts.controller;
 
-import com.example.phonecontacts.convertion.UserConvert;
+import com.example.phonecontacts.mappers.UserMapper;
 import com.example.phonecontacts.dto.UserDTO;
 import com.example.phonecontacts.service.AuthenticationService;
 import org.springframework.http.ResponseEntity;
@@ -10,25 +10,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AuthController {
-    private final UserConvert userConvert;
+    private final UserMapper userMapper;
     private final AuthenticationService authenticationService;
 
-    public AuthController(UserConvert userConvert, AuthenticationService authenticationService) {
-        this.userConvert = userConvert;
+    public AuthController(UserMapper userConvert, AuthenticationService authenticationService) {
+        this.userMapper = userConvert;
         this.authenticationService = authenticationService;
     }
 
     @PostMapping("/auth")
     public ResponseEntity<?> authenticateUser(@RequestBody UserDTO userData) {
         return authenticationService.authenticate(
-                userConvert.convertDTO(userData)
+                userMapper.convertDTO(userData)
         );
     }
 
     @PostMapping("/registration")
     public ResponseEntity<?> registrateUser(@RequestBody UserDTO userDTO) {
         return authenticationService.registrateNewUser(
-                userConvert.convertDTO(userDTO)
+                userMapper.convertDTO(userDTO)
         );
     }
 }

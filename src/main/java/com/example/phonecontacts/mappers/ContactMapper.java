@@ -1,4 +1,4 @@
-package com.example.phonecontacts.convertion;
+package com.example.phonecontacts.mappers;
 
 import com.example.phonecontacts.builder.ContactBuilder;
 import com.example.phonecontacts.builder.ContactDTOBuilder;
@@ -7,12 +7,12 @@ import com.example.phonecontacts.entity.Contact;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ContactConvert {
+public class ContactMapper {
 
     private final ContactBuilder builder;
     private final ContactDTOBuilder dtoBuilder;;
 
-    public ContactConvert(ContactBuilder builder, ContactDTOBuilder dtoBuilder) {
+    public ContactMapper(ContactBuilder builder, ContactDTOBuilder dtoBuilder) {
         this.builder = builder;
         this.dtoBuilder = dtoBuilder;
     }

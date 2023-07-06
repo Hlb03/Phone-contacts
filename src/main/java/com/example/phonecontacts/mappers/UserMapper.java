@@ -1,4 +1,4 @@
-package com.example.phonecontacts.convertion;
+package com.example.phonecontacts.mappers;
 
 import com.example.phonecontacts.builder.UserBuilder;
 import com.example.phonecontacts.dto.UserDTO;
@@ -6,11 +6,11 @@ import com.example.phonecontacts.entity.User;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserConvert {
+public class UserMapper {
 
     private final UserBuilder builder;
 
-    public UserConvert(UserBuilder builder) {
+    public UserMapper(UserBuilder builder) {
         this.builder = builder;
     }
 
