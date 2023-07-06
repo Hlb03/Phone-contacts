@@ -2,10 +2,8 @@ package com.example.phonecontacts.service.implementation;
 
 import com.example.phonecontacts.builder.ContactBuilder;
 import com.example.phonecontacts.entity.Contact;
-import com.example.phonecontacts.entity.User;
 import com.example.phonecontacts.repository.ContactRepository;
-import com.example.phonecontacts.repository.EmailRepository;
-import com.example.phonecontacts.repository.PhoneNumberRepository;
+import com.example.phonecontacts.repository.UserRepository;
 import com.example.phonecontacts.service.ContactService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -17,25 +15,25 @@ import java.util.List;
 public class ContactServiceImpl implements ContactService {
 
     private final ContactRepository contactRepository;
-    private final EmailRepository emailRepository;
-    private final PhoneNumberRepository numberRepository;
+    private final UserRepository userRepository;
+
     private final ContactBuilder contactBuilder;
 
-    public ContactServiceImpl(ContactRepository contactRepository, EmailRepository emailRepository, PhoneNumberRepository numberRepository, ContactBuilder builder) {
+    public ContactServiceImpl(ContactRepository contactRepository, UserRepository userRepository, ContactBuilder builder) {
         this.contactRepository = contactRepository;
-        this.emailRepository = emailRepository;
-        this.numberRepository = numberRepository;
+        this.userRepository = userRepository;
         this.contactBuilder = builder;
     }
 
 
-    // TODO: extract user identifier from Spring Security session credentials
     @Override
     @Transactional
-    public void addNewContact(Contact contact) {
-        User user = new User();
-        user.setId(1);
-        contact.setUser(user);
+    public void addNewContact(Contact contact, String username) {
+        System.out.println(username);
+        contact.setUser(
+                userRepository.getUserByUserName(username).get()
+        );
+        contact.setId(0);
         contactRepository.save(contact);
 
         contact.getEmails()
@@ -57,26 +55,27 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public List<Contact> getAllContacts() {
-        return contactRepository.findAllByUserId(1);
+    public List<Contact> getAllContacts(String username) {
+        return contactRepository.findAllByUserUserName(username);
     }
 
     @Override
-    public void updateContactInfo(int userId, Contact contact) {
-        Contact cont = contactRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
+    public void updateContactInfo(int contactId, Contact contact) {
+        Contact cont = contactRepository.findById(contactId).orElseThrow(EntityNotFoundException::new);
         cont.setName(contact.getName());
         cont.setEmails(contact.getEmails());
         cont.setPhoneNumbers(contact.getPhoneNumbers());
 
-        contact.getEmails()
+        cont.getEmails()
                 .forEach(
-                        email -> email.setContact(contactBuilder.setId(userId).build())
+                        email -> email.setContact(contactBuilder.setId(contactId).build())
                 );
-        contact.getPhoneNumbers()
+        cont.getPhoneNumbers()
                 .forEach(
-                        number -> number.setContact(contactBuilder.setId(userId).build())
+                        number -> number.setContact(contactBuilder.setId(contactId).build())
                 );
 
+        System.out.println(cont);
         contactRepository.save(cont);
     }
 

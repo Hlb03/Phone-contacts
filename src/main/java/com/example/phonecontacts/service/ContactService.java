@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface ContactService {
 
-    void addNewContact(Contact contact);
+    void addNewContact(Contact contact, String userName);
 
-    List<Contact> getAllContacts();
+    List<Contact> getAllContacts(String username);
 
-    void updateContactInfo(int userId, Contact contact);
+    void updateContactInfo(int contactId, Contact contact);
 
     void deleteContactById(int id);
     void deleteContactByName(String name);
