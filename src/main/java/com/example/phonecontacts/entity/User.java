@@ -1,6 +1,5 @@
 package com.example.phonecontacts.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -14,7 +13,8 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String mail;
+    @Column(name = "username")
+    private String userName;
 
     private String password;
 
@@ -29,12 +29,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getMail() {
-        return mail;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setUserName(String mail) {
+        this.userName = mail;
     }
 
     public String getPassword() {
@@ -58,19 +58,19 @@ public class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && Objects.equals(mail, user.mail) && Objects.equals(password, user.password) && Objects.equals(contacts, user.contacts);
+        return id == user.id && Objects.equals(userName, user.userName) && Objects.equals(password, user.password) && Objects.equals(contacts, user.contacts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, mail, password, contacts);
+        return Objects.hash(id, userName, password, contacts);
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", mail='" + mail + '\'' +
+                ", username='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", contacts=" + contacts +
                 '}';
