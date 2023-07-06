@@ -14,10 +14,10 @@ USE `phone_contact` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `phone_contact`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `mail` VARCHAR(45) NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `mail_UNIQUE` (`mail` ASC) VISIBLE)
+  UNIQUE INDEX `mail_UNIQUE` (`username` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
