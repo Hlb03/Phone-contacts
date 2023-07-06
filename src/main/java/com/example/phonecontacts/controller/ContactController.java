@@ -2,13 +2,11 @@ package com.example.phonecontacts.controller;
 
 import com.example.phonecontacts.convertion.ContactConvert;
 import com.example.phonecontacts.dto.ContactDTO;
-import com.example.phonecontacts.entity.Contact;
 import com.example.phonecontacts.service.ContactService;
-import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,28 +24,26 @@ public class ContactController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addContact(@RequestBody ContactDTO contactDTO) {
-        System.out.println("INPUT: " + contactDTO);
-        Contact contact = contactConvert.convertDTO(contactDTO);
-        System.out.println("OUTPUT: " + contact);
-
-        contactService.addNewContact(contact);
+    public void addContact(@RequestBody ContactDTO contactDTO, Principal principal) {
+        contactService.addNewContact(
+                contactConvert.convertDTO(contactDTO),
+                principal.getName()
+        );
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ContactDTO> getAllContacts() {
-        return contactService.getAllContacts()
+    public List<ContactDTO> getAllContacts(Principal principal) {
+        return contactService.getAllContacts(principal.getName())
                 .stream()
                 .map(contactConvert::convertEntity)
                 .collect(Collectors.toList());
     }
 
-    @PutMapping("/{userId}")
+    @PutMapping("/{contactId}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateContact(@PathVariable int userId, @RequestBody ContactDTO contactDTO) {
-        System.out.println("CONTACT DTO: " + contactDTO);
-        contactService.updateContactInfo(userId ,contactConvert.convertDTO(contactDTO));
+    public void updateContact(@PathVariable int contactId, @RequestBody ContactDTO contactDTO) {
+        contactService.updateContactInfo(contactId,contactConvert.convertDTO(contactDTO));
     }
 
     @DeleteMapping("/{userId}")
