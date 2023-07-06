@@ -86,6 +86,7 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
+    @Transactional
     public void deleteContactByName(String name) {
         contactRepository.deleteByName(name);
     }

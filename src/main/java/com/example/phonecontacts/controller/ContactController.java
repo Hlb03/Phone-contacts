@@ -58,7 +58,6 @@ public class ContactController {
 
     @DeleteMapping("/name/{userName}")
     @ResponseStatus(HttpStatus.OK)
-    @Transactional
     public void deleteUserByName(@PathVariable String userName) {
         contactService.deleteContactByName(userName);
     }
