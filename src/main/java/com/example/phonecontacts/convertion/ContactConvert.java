@@ -4,11 +4,7 @@ import com.example.phonecontacts.builder.ContactBuilder;
 import com.example.phonecontacts.builder.ContactDTOBuilder;
 import com.example.phonecontacts.dto.ContactDTO;
 import com.example.phonecontacts.entity.Contact;
-import com.example.phonecontacts.entity.Email;
-import com.example.phonecontacts.entity.PhoneNumber;
 import org.springframework.stereotype.Component;
-
-import java.util.stream.Collectors;
 
 @Component
 public class ContactConvert {
@@ -22,14 +18,13 @@ public class ContactConvert {
     }
 
     public ContactDTO convertEntity(Contact contact) {
-        ContactDTO dto = dtoBuilder
+        //        System.out.println("DTO: " + dto);
+        return dtoBuilder
                 .setId(contact.getId())
                 .setName(contact.getName())
                 .setEmails(contact.getEmails())
                 .setPhones(contact.getPhoneNumbers())
                 .build();
-//        System.out.println("DTO: " + dto);
-        return dto;
     }
 
     public Contact convertDTO(ContactDTO contactDTO) {
