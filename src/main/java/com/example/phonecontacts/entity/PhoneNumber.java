@@ -2,6 +2,7 @@ package com.example.phonecontacts.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -14,6 +15,7 @@ public class PhoneNumber implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Pattern(regexp = "\\+[0-9]{12}", message = "Invalid phone number type")
     private String number;
 
     @ManyToOne(fetch = FetchType.LAZY)

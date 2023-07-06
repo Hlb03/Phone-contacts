@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "contact")
-public class Contact implements Serializable {
+public class Contact {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,7 +71,7 @@ public class Contact implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Contact contact = (Contact) o;
-        return id == contact.id && Objects.equals(name, contact.name) && Objects.equals(emails, contact.emails) && Objects.equals(phoneNumbers, contact.phoneNumbers) && Objects.equals(user, contact.user);
+        return Objects.equals(id, contact.id) && Objects.equals(name, contact.name) && Objects.equals(emails, contact.emails) && Objects.equals(phoneNumbers, contact.phoneNumbers) && Objects.equals(user, contact.user);
     }
 
     @Override

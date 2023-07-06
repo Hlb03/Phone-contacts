@@ -3,6 +3,7 @@ package com.example.phonecontacts.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -15,6 +16,7 @@ public class Email implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @jakarta.validation.constraints.Email(message = "Incorrect email provided")
     private String mail;
 
     @ManyToOne(fetch = FetchType.LAZY)
