@@ -11,7 +11,7 @@ import java.util.Objects;
 @Component
 public class ContactDTO implements Serializable {
 
-    private int id;
+    private Integer id;
     private String name;
     private List<Email> emails;
     private List<PhoneNumber> phones;

@@ -11,7 +11,7 @@ import java.util.Objects;
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "username")
     private String userName;
