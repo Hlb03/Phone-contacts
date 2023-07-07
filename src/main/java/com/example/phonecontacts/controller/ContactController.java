@@ -25,6 +25,7 @@ public class ContactController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void addContact(@RequestBody ContactDTO contactDTO, Principal principal) {
+        System.out.println(contactDTO);
         contactService.addNewContact(
                 contactMapper.convertDTO(contactDTO),
                 principal.getName()

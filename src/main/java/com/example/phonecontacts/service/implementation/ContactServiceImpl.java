@@ -29,24 +29,24 @@ public class ContactServiceImpl implements ContactService {
     @Override
     @Transactional
     public void addNewContact(Contact contact, String username) {
-        System.out.println(username);
         contact.setUser(
                 userRepository.getUserByUserName(username).get()
         );
-        contact.setId(0);
+        System.out.println(contact);
         contactRepository.save(contact);
 
+        System.out.println(contact.getId());
         contact.getEmails()
                 .forEach(
                         email -> {
-                            email.setContact(contactBuilder.setId(contact.getId()).build());
+                            email.setContact(contactBuilder.builder().setId(contact.getId()).build());
                             email.setId(0);
                         }
                 );
         contact.getPhoneNumbers()
                 .forEach(
                         number -> {
-                            number.setContact(contactBuilder.setId(contact.getId()).build());
+                            number.setContact(contactBuilder.builder().setId(contact.getId()).build());
                             number.setId(0);
                         }
                 );
@@ -68,11 +68,11 @@ public class ContactServiceImpl implements ContactService {
 
         cont.getEmails()
                 .forEach(
-                        email -> email.setContact(contactBuilder.setId(contactId).build())
+                        email -> email.setContact(contactBuilder.builder().setId(contactId).build())
                 );
         cont.getPhoneNumbers()
                 .forEach(
-                        number -> number.setContact(contactBuilder.setId(contactId).build())
+                        number -> number.setContact(contactBuilder.builder().setId(contactId).build())
                 );
 
         System.out.println(cont);

@@ -18,8 +18,8 @@ public class ContactMapper {
     }
 
     public ContactDTO convertEntity(Contact contact) {
-        //        System.out.println("DTO: " + dto);
         return dtoBuilder
+                .builder()
                 .setId(contact.getId())
                 .setName(contact.getName())
                 .setEmails(contact.getEmails())
@@ -29,7 +29,8 @@ public class ContactMapper {
 
     public Contact convertDTO(ContactDTO contactDTO) {
         return builder
-                .setId(contactDTO.getId())
+                .builder()
+//                .setId(contactDTO.getId())
                 .setName(contactDTO.getName())
                 .setEmails(contactDTO.getEmails())
                 .setPhones(contactDTO.getPhones())

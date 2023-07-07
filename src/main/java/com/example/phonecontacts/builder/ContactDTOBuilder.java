@@ -3,18 +3,41 @@ package com.example.phonecontacts.builder;
 import com.example.phonecontacts.dto.ContactDTO;
 import com.example.phonecontacts.entity.Email;
 import com.example.phonecontacts.entity.PhoneNumber;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-public interface ContactDTOBuilder {
+@Component
+public class ContactDTOBuilder {
 
-    ContactDTOBuilder setId(int id);
+    private ContactDTO contactDTO;
 
-    ContactDTOBuilder setName(String name);
-//
-    ContactDTOBuilder setPhones(List<PhoneNumber> numbers);
-//
-    ContactDTOBuilder setEmails(List<Email> emails);
+    public ContactDTOBuilder builder() {
+        contactDTO = new ContactDTO();
+        return this;
+    }
 
-    ContactDTO build();
+    public ContactDTOBuilder setId(int id) {
+        contactDTO.setId(id);
+        return this;
+    }
+
+    public ContactDTOBuilder setName(String name) {
+        contactDTO.setName(name);
+        return this;
+    }
+
+    public ContactDTOBuilder setPhones(List<PhoneNumber> numbers) {
+        contactDTO.setPhones(numbers);
+        return this;
+    }
+
+    public ContactDTOBuilder setEmails(List<Email> emails) {
+        contactDTO.setEmails(emails);
+        return this;
+    }
+
+    public ContactDTO build() {
+        return contactDTO;
+    }
 }

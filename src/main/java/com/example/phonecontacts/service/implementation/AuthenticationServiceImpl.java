@@ -1,6 +1,6 @@
 package com.example.phonecontacts.service.implementation;
 
-import com.example.phonecontacts.convertion.UserConvert;
+import com.example.phonecontacts.mappers.UserMapper;
 import com.example.phonecontacts.dto.JwtToken;
 import com.example.phonecontacts.entity.User;
 import com.example.phonecontacts.exception.RestException;
@@ -24,15 +24,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final AuthenticationManager manager;
     private final UserDetailsService detailsService;
     private final UserService userService;
-    private final UserConvert userConvert;
     private final BCryptPasswordEncoder encoder;
 
-    public AuthenticationServiceImpl(JsonTokenUtil tokenUtil, AuthenticationManager manager, UserDetailsService detailsService, UserService userService, UserConvert userConvert, BCryptPasswordEncoder encoder) {
+    public AuthenticationServiceImpl(JsonTokenUtil tokenUtil, AuthenticationManager manager, UserDetailsService detailsService, UserService userService, BCryptPasswordEncoder encoder) {
         this.tokenUtil = tokenUtil;
         this.manager = manager;
         this.detailsService = detailsService;
         this.userService = userService;
-        this.userConvert = userConvert;
         this.encoder = encoder;
     }
 
