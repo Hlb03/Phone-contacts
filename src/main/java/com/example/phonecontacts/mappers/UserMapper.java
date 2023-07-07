@@ -17,7 +17,7 @@ public class UserMapper {
     public User convertDTO(UserDTO dto) {
         return builder
                 .builder()
-                .setUsername(dto.getUsername())
+                .setUsername(dto.getLogin())
                 .setPassword(dto.getPassword())
                 .build();
     }

@@ -40,14 +40,14 @@ public class ContactServiceImpl implements ContactService {
                 .forEach(
                         email -> {
                             email.setContact(contactBuilder.builder().setId(contact.getId()).build());
-                            email.setId(0);
+                            email.setId(null);
                         }
                 );
         contact.getPhoneNumbers()
                 .forEach(
                         number -> {
                             number.setContact(contactBuilder.builder().setId(contact.getId()).build());
-                            number.setId(0);
+                            number.setId(null);
                         }
                 );
 
@@ -68,14 +68,15 @@ public class ContactServiceImpl implements ContactService {
 
         cont.getEmails()
                 .forEach(
-                        email -> email.setContact(contactBuilder.builder().setId(contactId).build())
+                        email -> {
+                            email.setContact(contactBuilder.builder().setId(contactId).build());
+                        }
                 );
         cont.getPhoneNumbers()
                 .forEach(
                         number -> number.setContact(contactBuilder.builder().setId(contactId).build())
                 );
 
-        System.out.println(cont);
         contactRepository.save(cont);
     }
 
