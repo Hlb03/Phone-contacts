@@ -2,6 +2,7 @@ package com.example.phonecontacts.dto;
 
 import com.example.phonecontacts.entity.Email;
 import com.example.phonecontacts.entity.PhoneNumber;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;

@@ -23,11 +23,11 @@ public class PhoneNumber implements Serializable {
     @JsonIgnore
     private Contact contact;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -52,7 +52,7 @@ public class PhoneNumber implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PhoneNumber that = (PhoneNumber) o;
-        return id == that.id && Objects.equals(number, that.number) && Objects.equals(contact, that.contact);
+        return Objects.equals(id, that.id) && Objects.equals(number, that.number) && Objects.equals(contact, that.contact);
     }
 
     @Override

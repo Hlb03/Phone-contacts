@@ -2,7 +2,6 @@ package com.example.phonecontacts.entity;
 
 import jakarta.persistence.*;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,11 +25,11 @@ public class Contact {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
